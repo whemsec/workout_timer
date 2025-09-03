@@ -145,6 +145,9 @@ class WorkoutTimer:
             self.play_button.config(text="Stop")
             self.status_label.config(text="Timer running...")
             
+            # Play sound when starting
+            self.play_sound()
+            
             # Start countdown in separate thread
             self.timer_thread = threading.Thread(target=self.countdown_timer, daemon=True)
             self.timer_thread.start()
