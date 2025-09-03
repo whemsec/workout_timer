@@ -39,7 +39,7 @@ class WorkoutTimer:
         
         self.workout_var = tk.StringVar(value="box")
         self.workout_combo = ttk.Combobox(workout_frame, textvariable=self.workout_var, 
-                                         values=["box", "easy cardio"], state="readonly", width=15)
+                                         values=["box", "easy cardio", "intermediate cardio"], state="readonly", width=15)
         self.workout_combo.grid(row=0, column=1)
         self.workout_combo.bind("<<ComboboxSelected>>", self.on_workout_change)
         
@@ -66,8 +66,10 @@ class WorkoutTimer:
         self.workout_type = self.workout_var.get()
         if self.workout_type == "box":
             self.countdown_value = 60
-        else:  # easy cardio
+        elif self.workout_type == "easy cardio":
             self.countdown_value = 30
+        else:  # intermediate cardio
+            self.countdown_value = 45
         self.update_timer_display()
         self.status_label.config(text=f"Selected: {self.workout_type}")
         
@@ -75,15 +77,19 @@ class WorkoutTimer:
         """Get the duration for the selected workout type"""
         if self.workout_type == "box":
             return 60
-        else:  # easy cardio
+        elif self.workout_type == "easy cardio":
             return 30
+        else:  # intermediate cardio
+            return 45
     
     def get_workout_description(self):
         """Get the description for the selected workout type"""
         if self.workout_type == "box":
             return "Rest period"
-        else:  # easy cardio
+        elif self.workout_type == "easy cardio":
             return "Cardio interval"
+        else:  # intermediate cardio
+            return "Intermediate Cardio"
         
     def play_sound(self):
         """Play a beep sound to signal the end of an interval"""
