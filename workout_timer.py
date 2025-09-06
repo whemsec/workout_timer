@@ -39,7 +39,7 @@ class WorkoutTimer:
         
         self.workout_var = tk.StringVar(value="box")
         self.workout_combo = ttk.Combobox(workout_frame, textvariable=self.workout_var, 
-                                         values=["box", "easy cardio", "intermediate cardio"], state="readonly", width=15)
+                                         values=["box", "easy cardio", "intermediate cardio", "5 mins"], state="readonly", width=15)
         self.workout_combo.grid(row=0, column=1)
         self.workout_combo.bind("<<ComboboxSelected>>", self.on_workout_change)
         
@@ -68,6 +68,8 @@ class WorkoutTimer:
             self.countdown_value = 60
         elif self.workout_type == "easy cardio":
             self.countdown_value = 30
+        elif self.workout_type == "5 mins":
+            self.countdown_value = 300
         else:  # intermediate cardio
             self.countdown_value = 45
         self.update_timer_display()
@@ -79,6 +81,8 @@ class WorkoutTimer:
             return 60
         elif self.workout_type == "easy cardio":
             return 30
+        elif self.workout_type == "5 mins":
+            return 300
         else:  # intermediate cardio
             return 45
     
@@ -88,6 +92,8 @@ class WorkoutTimer:
             return "Rest period"
         elif self.workout_type == "easy cardio":
             return "Cardio interval"
+        elif self.workout_type == "5 mins":
+            return "5 minute countdown"
         else:  # intermediate cardio
             return "Intermediate Cardio"
         
